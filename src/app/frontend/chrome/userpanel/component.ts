@@ -31,10 +31,10 @@ export class UserPanelComponent implements OnInit {
   constructor(private readonly authService_: AuthService) {}
 
   ngOnInit(): void {
-    this.authService_.getLoginStatus().subscribe(status => {
-      this.loginStatus = status;
-      this.isLoginStatusInitialized = true;
-    });
+    // this.authService_.getLoginStatus().subscribe(status => {
+    //   this.loginStatus = status;
+    //   this.isLoginStatusInitialized = true;
+    // });
   }
 
   isAuthSkipped(): boolean {

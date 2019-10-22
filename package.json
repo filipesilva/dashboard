@@ -7,16 +7,18 @@
   },
   "license": "Apache-2.0",
   "scripts": {
+    "fs-x": "ng xi18n --outFile ../i18n/messages.xlf",
+    "fs-s-fr": "npm run clean && ng build --aot --prod --i18nFile i18n/fr/messages.fr.xlf --i18nFormat xlf --i18nLocale fr && http-server ./.tmp/frontend",
+    "fs-s-ko": "npm run clean && ng build --aot --prod --i18nFile i18n/ko/messages.ko.xlf --i18nFormat xlf --i18nLocale ko && http-server ./.tmp/frontend",
     "start": "concurrently \"npm run start:backend --kubernetes-dashboard:sidecar_host=$npm_package_config_sidecar_host\" \"npm run start:frontend --kubernetes-dashboard:bind_address=$npm_package_config_bind_address --kubernetes-dashboard:port=$npm_package_config_port\"",
     "start:https": "concurrently \"npm run start:backend:https --kubernetes-dashboard:sidecar_host=$npm_package_config_sidecar_host\" \"npm run start:frontend:https --kubernetes-dashboard:bind_address=$npm_package_config_bind_address --kubernetes-dashboard:port=$npm_package_config_port\"",
     "start:frontend": "npm run postversion && ng serve --aot --progress=false --proxy-config aio/proxy.conf.json --host=$npm_package_config_bind_address --port $npm_package_config_port",
     "start:frontend:https": "node aio/scripts/version.js && ng serve --progress=false --aot --proxy-config aio/https-proxy.conf.json --ssl --host=$npm_package_config_bind_address --port $npm_package_config_port",
-    "start:backend": "KUBECONFIG=${KUBECONFIG:-$npm_package_config_kubeconfig}; gulp serve --kubeconfig $KUBECONFIG --sidecarServerHost $npm_package_config_sidecar_host",
     "start:backend:https": "KUBECONFIG=${KUBECONFIG:-$npm_package_config_kubeconfig}; gulp serve --kubeconfig $KUBECONFIG --autoGenerateCerts true --sidecarServerHost $npm_package_config_sidecar_host",
     "start:prod": "npm run build && ./$npm_package_config_dashboard_binary_path --kubeconfig $npm_package_config_kubeconfig --locale-config $npm_package_config_dashboard_locale_config --auto-generate-certificates --bind-address $npm_package_config_bind_address --sidecar-host $npm_package_config_sidecar_host --port $npm_package_config_port",
     "build": "./aio/scripts/build.sh",
     "build:cross": "./aio/scripts/build.sh -c",
-    "build:frontend": "npm run clean && ng build --aot --prod --outputPath=$npm_package_config_frontend_build_dir",
+    "build:frontend": "npm run clean && ng build --aot --prod",
     "build:backend": "npm run clean && gulp backend:prod",
     "build:backend:cross": "npm run clean && gulp backend:prod:cross",
     "docker:build": "npm run clean && npm run build:cross && gulp docker-image:release:cross",
@@ -28,7 +30,6 @@
     "test": "npm run test:frontend && npm run test:backend && npm run e2e",
     "test:frontend": "ng test --karma-config ./aio/karma.conf.js --watch=false",
     "test:frontend:coverage": "ng test --karma-config ./aio/karma.conf.js --watch=false --code-coverage",
-    "test:frontend:watch": "ng test --karma-config ./aio/karma.conf.js",
     "test:backend": "go test github.com/kubernetes/dashboard/src/app/backend/...",
     "test:backend:coverage": "./aio/scripts/coverage-backend.sh",
     "test:coverage": "npm run test:frontend:coverage && npm run test:backend:coverage",
@@ -53,8 +54,7 @@
     "fix:license": "gulp update-license-headers",
     "fix:i18n": "ng xi18n --outFile ../i18n/messages.xlf && aio/scripts/xliffmerge.sh",
     "clean": "rm -rf .go_workspace .tmp coverage dist npm-debug.log",
-    "postversion": "node aio/scripts/version.js",
-    "postinstall": "node aio/scripts/version.js && command -v golangci-lint >/dev/null 2>&1 || { curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s -- -b $(go env GOPATH)/bin v1.17.1; } && go mod download"
+    "postversion": "node aio/scripts/version.js"
   },
   "husky": {
     "hooks": {

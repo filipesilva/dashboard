@@ -12,19 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {animate, AUTO_STYLE, state, style, transition, trigger} from '@angular/animations';
+import {
+  animate,
+  AUTO_STYLE,
+  state,
+  style,
+  transition,
+  trigger,
+  AnimationTriggerMetadata,
+} from '@angular/animations';
 
 const DEFAULT_TRANSITION_TIME = '500ms ease-in-out';
 
 export class Animations {
-  static easeOut = trigger('easeOut', [
+  static easeOut: AnimationTriggerMetadata = trigger('easeOut', [
     transition('* => void', [
       style({opacity: 1}),
       animate(DEFAULT_TRANSITION_TIME, style({opacity: 0})),
     ]),
   ]);
 
-  static easeInOut = trigger('easeInOut', [
+  static easeInOut: AnimationTriggerMetadata = trigger('easeInOut', [
     transition('void => *', [
       style({opacity: 0}),
       animate(DEFAULT_TRANSITION_TIME, style({opacity: 1})),
@@ -32,7 +40,7 @@ export class Animations {
     transition('* => void', [animate(DEFAULT_TRANSITION_TIME, style({opacity: 0}))]),
   ]);
 
-  static expandInOut = trigger('expandInOut', [
+  static expandInOut: AnimationTriggerMetadata = trigger('expandInOut', [
     state('true', style({height: '0', display: 'none'})),
     state(
       'false',
