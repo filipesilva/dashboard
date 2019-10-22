@@ -3,9 +3,11 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "baseUrl": "../src/app/frontend",
-    "module": "es6",
+    "module": "esnext",
     "target": "es5",
-    "types": ["node"]
+    "types": [
+      "node"
+    ]
   },
   "exclude": [
     "../src/app/frontend/**/*.spec.ts"
@@ -13,5 +15,11 @@
   "include": [
     "../src/app/frontend/**/*"
   ],
-  "lib": ["es2017", "dom"]
+  "lib": [
+    "es2017",
+    "dom"
+  ],
+  "angularCompilerOptions": {
+    "enableIvy": true,
+  }
 }
