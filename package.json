@@ -10,7 +10,6 @@
     "fs-x": "ng xi18n --outFile ../i18n/messages.xlf",
     "fs-s-fr": "npm run clean && ng build --aot --prod --i18nFile i18n/fr/messages.fr.xlf --i18nFormat xlf --i18nLocale fr && http-server ./.tmp/frontend",
     "fs-s-ko": "npm run clean && ng build --aot --prod --i18nFile i18n/ko/messages.ko.xlf --i18nFormat xlf --i18nLocale ko && http-server ./.tmp/frontend",
-    "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "start": "concurrently \"npm run start:backend --kubernetes-dashboard:sidecar_host=$npm_package_config_sidecar_host\" \"npm run start:frontend --kubernetes-dashboard:bind_address=$npm_package_config_bind_address --kubernetes-dashboard:port=$npm_package_config_port\"",
     "start:https": "concurrently \"npm run start:backend:https --kubernetes-dashboard:sidecar_host=$npm_package_config_sidecar_host\" \"npm run start:frontend:https --kubernetes-dashboard:bind_address=$npm_package_config_bind_address --kubernetes-dashboard:port=$npm_package_config_port\"",
     "start:frontend": "npm run postversion && ng serve --aot --progress=false --proxy-config aio/proxy.conf.json --host=$npm_package_config_bind_address --port $npm_package_config_port",
