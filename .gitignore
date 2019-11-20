@@ -12,7 +12,7 @@ node_modules/
 .sass-cache/
 .tmp/
 .cached_tools/
-dist/
+dist*/
 coverage/
 cypress/screenshots
 cypress/videos
