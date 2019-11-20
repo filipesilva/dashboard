@@ -48,10 +48,10 @@
                 }
               ],
               "optimization": true,
-              "outputHashing": "all",
+              "outputHashing": "none",
               "sourceMap": false,
               "extractCss": true,
-              "namedChunks": false,
+              "namedChunks": true,
               "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -112,7 +112,7 @@
           }
         }
       }
-    },
+    }
   },
   "defaultProject": "kubernetes-dashboard",
   "schematics": {
